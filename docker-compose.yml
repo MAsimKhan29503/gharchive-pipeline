@@ -1,0 +1,19 @@
+services:
+  warehouse-db:
+    image: postgres:16
+    container_name: warehouse-db
+    environment:
+      POSTGRES_USER: ${WH_USER}
+      POSTGRES_PASSWORD: ${WH_PASSWORD}
+      POSTGRES_DB: ${WH_DB}
+    ports:
+      - "5433:5432"
+    volumes:
+      - warehouse-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${WH_USER}"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  warehouse-db-data:
