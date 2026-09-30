@@ -10,6 +10,7 @@ services:
       - "5433:5432"
     volumes:
       - warehouse-db-data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "${WH_USER}"]
       interval: 5s
