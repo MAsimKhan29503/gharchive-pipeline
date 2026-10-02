@@ -5,3 +5,7 @@ sources:
     schema: raw
     tables:
       - name: gh_events
+        loaded_at_field: loaded_at
+        freshness:
+          warn_after: {count: 6, period: hour}
+          error_after: {count: 24, period: hour}

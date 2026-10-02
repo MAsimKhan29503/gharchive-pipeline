@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_events
+    description: "One row per GitHub event, with the raw JSON unpacked into columns."
+    columns:
+      - name: event_id
+        data_tests:
+          - not_null
+          - unique
+      - name: event_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [PushEvent, PullRequestEvent, WatchEvent, IssuesEvent, ForkEvent]
+      - name: repo_id
+        description: "Source repo ID. Empty for a few ForkEvents where GitHub sends no repo (e.g. private or deleted source repo)."
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: created_at
+        data_tests:
+          - not_null
