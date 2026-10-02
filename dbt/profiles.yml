@@ -1,0 +1,12 @@
+gharchive:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('WH_HOST') }}"
+      port: "{{ env_var('WH_PORT') | as_number }}"
+      user: "{{ env_var('WH_USER') }}"
+      password: "{{ env_var('WH_PASSWORD') }}"
+      dbname: "{{ env_var('WH_DB') }}"
+      schema: analytics
+      threads: 4
