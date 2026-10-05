@@ -29,3 +29,12 @@ models:
           - relationships:
               to: ref('dim_actor')
               field: actor_id
+
+  - name: fct_daily_repo_activity
+    columns:
+      - name: event_date
+        data_tests: [not_null]
+      - name: repo_id
+        data_tests: [not_null]
+      - name: total_events
+        data_tests: [not_null]
