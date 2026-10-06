@@ -8,9 +8,11 @@ import requests
 from psycopg2.extras import execute_values
 
 from airflow.decorators import dag, task
+from airflow.datasets import Dataset
 
 KEEP_TYPES = {"PushEvent", "PullRequestEvent", "WatchEvent", "IssuesEvent", "ForkEvent"}
 BATCH_SIZE = 5000
+RAW_EVENTS = Dataset("postgres://warehouse-db/raw.gh_events")
 
 
 def flush(cur, batch):
@@ -32,7 +34,7 @@ def flush(cur, batch):
     tags=["gharchive", "ingest"],
 )
 def gharchive_ingest():
-    @task
+    @task(outlets=[RAW_EVENTS])
     def load_hour(data_interval_start=None):
         file_name = f"{data_interval_start:%Y-%m-%d}-{data_interval_start.hour}.json.gz"
         url = f"https://data.gharchive.org/{file_name}"
