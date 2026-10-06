@@ -1,0 +1,15 @@
+INSERT INTO raw.gh_events (event_id, event_type, created_at, source_file, payload) VALUES
+(1, 'PushEvent', '2026-10-01T10:00:00Z', 'ci-sample.json.gz',
+ '{"id":"1","type":"PushEvent","actor":{"id":101,"login":"alice"},"repo":{"id":9001,"name":"alice/demo"},"payload":{}}'::jsonb),
+(2, 'PushEvent', '2026-10-01T10:05:00Z', 'ci-sample.json.gz',
+ '{"id":"2","type":"PushEvent","actor":{"id":102,"login":"dependabot[bot]"},"repo":{"id":9001,"name":"alice/demo"},"payload":{}}'::jsonb),
+(3, 'PullRequestEvent', '2026-10-01T11:00:00Z', 'ci-sample.json.gz',
+ '{"id":"3","type":"PullRequestEvent","actor":{"id":103,"login":"bob"},"repo":{"id":9002,"name":"bob/tools"},"payload":{"action":"opened"}}'::jsonb),
+(4, 'IssuesEvent', '2026-10-01T11:30:00Z', 'ci-sample.json.gz',
+ '{"id":"4","type":"IssuesEvent","actor":{"id":101,"login":"alice"},"repo":{"id":9002,"name":"bob/tools"},"payload":{"action":"opened"}}'::jsonb),
+(5, 'WatchEvent', '2026-10-02T09:00:00Z', 'ci-sample.json.gz',
+ '{"id":"5","type":"WatchEvent","actor":{"id":104,"login":"carol"},"repo":{"id":9001,"name":"alice/demo"},"payload":{"action":"started"}}'::jsonb),
+(6, 'ForkEvent', '2026-10-02T09:30:00Z', 'ci-sample.json.gz',
+ '{"id":"6","type":"ForkEvent","actor":{"id":104,"login":"carol"},"repo":{"id":9002,"name":"bob/tools"},"payload":{}}'::jsonb),
+(7, 'ForkEvent', '2026-10-02T10:00:00Z', 'ci-sample.json.gz',
+ '{"id":"7","type":"ForkEvent","actor":{"id":103,"login":"bob"},"repo":{},"payload":{}}'::jsonb);
